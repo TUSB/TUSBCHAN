@@ -1,0 +1,2 @@
+# TUSBCHAN
+TUSBの運営を支援するBOTです
