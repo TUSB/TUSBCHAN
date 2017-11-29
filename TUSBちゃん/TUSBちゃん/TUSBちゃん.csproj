@@ -169,6 +169,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\CPU.cs" />
     <Compile Include="API\Docomo\ChatAI.cs" />
     <Compile Include="API\Docomo\ChatResponse.cs" />
     <Compile Include="API\Docomo\DocomoService.cs" />

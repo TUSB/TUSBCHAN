@@ -27,7 +27,7 @@ namespace TUSBちゃん
 
         public async Task MainAsync()
         {
-
+            
             client = new DiscordSocketClient();
             commands = new CommandService();
             services = new ServiceCollection().BuildServiceProvider();
@@ -36,17 +36,23 @@ namespace TUSBちゃん
             client.Disconnected += Disconnected;
             client.UserLeft += UserLeft;
             client.Log += Log;
+            client.Ready += Start;
 
             string token = ini["Discord", "Token"];
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());
             await client.LoginAsync(TokenType.Bot, token);
             await client.StartAsync();
 
-
             var twitter = new API.Twitter.Streaming(client);
             twitter.StartStreaming();
 
             await Task.Delay(-1);
+        }
+
+        private Task Start()
+        {
+            var task = Task.Run(() => API.CPU.WatchingStart(client));
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -129,6 +135,7 @@ namespace TUSBちゃん
         private Task Disconnected(Exception ex)
         {
             Console.WriteLine("異常を検知したためTUSBちゃんを再起動します...");
+            client.Dispose();
             System.Diagnostics.Process.Start(Application.ExecutablePath);
             Environment.Exit(0);
             return Task.CompletedTask;

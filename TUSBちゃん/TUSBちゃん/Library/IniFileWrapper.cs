@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace TUSBちゃん.Library
 {
@@ -29,7 +30,7 @@ namespace TUSBちゃん.Library
         /// </summary>
         public IniFileWrapper()
         {
-            this.filePath = System.IO.Directory.GetCurrentDirectory() + @"\setting.ini";
+            this.filePath = System.IO.Path.Combine(Application.StartupPath, "setting.ini");
         }
 
         /// <summary>
