@@ -10,6 +10,7 @@ using System.Net;
 using System.Reactive.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TUSBちゃん.API.Twitter
@@ -34,8 +35,10 @@ namespace TUSBちゃん.API.Twitter
                 ini["Twitter", "consumerSecret"],
                 ini["Twitter", "accessToken"],
                 ini["Twitter", "accessSecret"]);
+
             Observe();
         }
+
 
         public void Observe()
         {

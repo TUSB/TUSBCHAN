@@ -51,7 +51,8 @@ namespace TUSBちゃん
 
         private Task Start()
         {
-            var task = Task.Run(() => API.CPU.WatchingStart(client));
+            //CPU監視がうるさかったので止めた
+            //var task = Task.Run(() => API.CPU.WatchingStart(client));
             return Task.CompletedTask;
         }
 
