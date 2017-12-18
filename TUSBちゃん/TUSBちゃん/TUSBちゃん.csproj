@@ -183,13 +183,13 @@
     <Compile Include="API\Twitter\TwitterService.cs" />
     <Compile Include="API\Weather.cs" />
     <Compile Include="API\Yonikimo.cs" />
-    <Compile Include="Functions\AudioService.cs" />
     <Compile Include="Functions\Decision.cs" />
     <Compile Include="Library\IniFileWrapper.cs" />
     <Compile Include="Modules\Creator\ServerControl.cs" />
     <Compile Include="Modules\EveryoneUser\AudioModule.cs" />
     <Compile Include="Modules\EveryoneUser\Game.cs" />
     <Compile Include="Modules\EveryoneUser\Infomation.cs" />
+    <Compile Include="Modules\EveryoneUser\Education.cs" />
     <Compile Include="Modules\EveryoneUser\SCP.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

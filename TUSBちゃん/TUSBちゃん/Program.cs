@@ -86,6 +86,8 @@ namespace TUSBちゃん
                 }
             }
 
+            new Modules.EveryoneUser.Education().Reply(message);
+
             int argPos = 0;
 
             //コマンドかどうか判定
@@ -113,6 +115,7 @@ namespace TUSBちゃん
         /// <returns></returns>
         private async Task UserJoined(SocketGuildUser user)
         {
+            //TUSBサーバー
             //Chatチャンネル
             var chatchannnel = client.GetChannel(290014442748379137) as SocketTextChannel;
             string welcome = string.Format("{0}様、ようこそTUSB会議へ！\nここではTUSBの最新情報や開発情報、意見やバグ報告などが行えます！\n\n" +

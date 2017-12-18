@@ -16,17 +16,10 @@ namespace TUSBちゃん.API
             {
                 GetCPUPercent();
 
-                if (percent > tmp)
+                if (percent >= 99)
                 {
-                    tmp = percent;
                     var chatchannnel = client.GetChannel(290014442748379137) as SocketTextChannel;
-                    string word = string.Format("録画サーバーのCPU使用率が{0}%を超過しました。\nこのままでは運営に支障が発生します。" +
-                        "\nサーバーをご利用の皆様は一度使用を中止してください", percent);
-                    chatchannnel.SendMessageAsync(word);
-                }
-                else if (percent <= 70)
-                {
-                    tmp = 70;
+                    chatchannnel.SendMessageAsync("あっ死ぬ...");
                 }
             }
         }
