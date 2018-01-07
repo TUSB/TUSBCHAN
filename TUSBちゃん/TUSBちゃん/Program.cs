@@ -139,7 +139,6 @@ namespace TUSBちゃん
         private Task Disconnected(Exception ex)
         {
             Console.WriteLine("異常を検知したためTUSBちゃんを再起動します...");
-            client.Dispose();
             System.Diagnostics.Process.Start(Application.ExecutablePath);
             Environment.Exit(0);
             return Task.CompletedTask;
