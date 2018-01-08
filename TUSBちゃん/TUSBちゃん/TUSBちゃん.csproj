@@ -182,7 +182,6 @@
     <Compile Include="API\Twitter\Streaming.cs" />
     <Compile Include="API\Twitter\TwitterService.cs" />
     <Compile Include="API\Weather.cs" />
-    <Compile Include="API\Yonikimo.cs" />
     <Compile Include="Functions\Decision.cs" />
     <Compile Include="Library\IniFileWrapper.cs" />
     <Compile Include="Modules\Creator\ServerControl.cs" />

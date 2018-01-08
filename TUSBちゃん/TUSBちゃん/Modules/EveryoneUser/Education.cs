@@ -24,17 +24,18 @@ namespace TUSBちゃん.Modules.EveryoneUser
                 if (ConnectDB(ref connection) == false)
                 {
                 }
-                string query = string.Format("SELECT * FROM 応答内容 WHERE 言葉=@言葉");
+                string query = string.Format("SELECT * FROM 応答内容");
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.Add("@言葉", SqlDbType.NVarChar);
-                command.Parameters["@言葉"].Value = message.Content;
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var channel = message.Channel as SocketTextChannel;
-                        await channel.SendMessageAsync(reader["返事"].ToString());
+                        if (message.Content.Contains(reader["言葉"].ToString()))
+                        {
+                            var channel = message.Channel as SocketTextChannel;
+                            await channel.SendMessageAsync(reader["返事"].ToString());
+                        }
                     }
                 }
             }

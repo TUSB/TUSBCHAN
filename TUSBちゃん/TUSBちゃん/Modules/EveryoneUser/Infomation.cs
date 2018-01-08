@@ -41,6 +41,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
             }
             sb.Append("```");
             await ReplyAsync(sb.ToString());
+
         }
 
         [Command("echo")]
@@ -193,28 +194,6 @@ namespace TUSBちゃん.Modules.EveryoneUser
             await Context.Channel.SendMessageAsync("", embed: eb);
         }
 
-        [Command("yonikimo")]
-        [Summary("世にも奇妙な物語のデータベースにアクセスします")]
-        public async Task Yonikimo([Summary("検索内容")] string word)
-        {
-            var yonikimo = new API.Yonikimo();
-            int no = 0;
-            if (!int.TryParse(word, out no))
-            {
-                no = yonikimo.SearchYonikimoNo(word);
-            }
-
-            if (no > -1)
-            {
-                await ReplyAsync("", embed: yonikimo.GetYonikimo(no));
-            }
-            else
-            {
-                await ReplyAsync("その世にも奇妙な物語は存在しません");
-            }
-
-        }
-
 
         [Command("userinfo")]
         [Summary("ユーザの情報を返します")]
@@ -246,7 +225,5 @@ namespace TUSBちゃん.Modules.EveryoneUser
 
             await ReplyAsync("", embed: eb);
         }
-
-        
     }
 }

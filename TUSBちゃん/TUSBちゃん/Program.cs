@@ -86,7 +86,7 @@ namespace TUSBちゃん
                 }
             }
 
-            new Modules.EveryoneUser.Education().Reply(message);
+            await new Modules.EveryoneUser.Education().Reply(message);
 
             int argPos = 0;
 
