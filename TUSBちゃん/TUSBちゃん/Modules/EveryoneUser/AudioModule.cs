@@ -1,16 +1,11 @@
 ﻿using Discord;
 using Discord.Audio;
 using Discord.Commands;
-using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using TUSBちゃん.Functions;
 using VideoLibrary;
 
 namespace TUSBちゃん.Modules.EveryoneUser
@@ -18,6 +13,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
     [RequireContext(ContextType.Guild)]
     public class AudioModule : ModuleBase
     {
+        /*
         private static IAudioClient client;
         private static Stream output;
         private static List<string> list = new List<string>();
@@ -149,6 +145,6 @@ namespace TUSBちゃん.Modules.EveryoneUser
                 UseShellExecute = false,
                 RedirectStandardOutput = true
             });
-        }
+        }*/
     }
 }

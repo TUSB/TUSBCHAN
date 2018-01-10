@@ -21,22 +21,6 @@ namespace TUSBちゃん.Modules.Creator
             _service = service;
         }
 
-        [Command("start")]
-        [Summary("製作サーバーを稼働させます *要Creator")]
-        public async Task Start()
-        {
-            var task = Task.Run(() => server.StartServer());
-            await ReplyAsync("サーバーを開始しました");
-        }
-
-        [Command("stop")]
-        [Summary("製作サーバーを停止させます *要Creator")]
-        public async Task Stop()
-        {
-            server.StopServer();
-            await ReplyAsync("サーバーを停止しました");
-        }
-
         [Command("tweet")]
         [Summary("TUSB公式アカウントでツイートをします *要Creator")]
         public async Task Tweet([Summary("呟く内容")] string tweet = null)

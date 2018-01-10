@@ -44,6 +44,13 @@ namespace TUSBちゃん.Modules.EveryoneUser
 
         }
 
+        [Command("now")]
+        [Summary("サーバーが存在するタイムゾーンの現在時刻を表示します")]
+        public async Task Now()
+        {
+            await ReplyAsync(DateTime.Now.ToString("yyyy年MM月dd日 tthh時mm分ss秒fffミリ秒"));
+        }
+
         [Command("echo")]
         [Summary("言葉を発言させる")]
         public async Task Say([Remainder, Summary("発言させる言葉")] string echo = null)
@@ -66,7 +73,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
             if (ip == null)
             {
                 await ReplyAsync("pingコマンドの後にアドレスを続けて入力してください\n" +
-                                 "例:「!ping tusb.ml」");
+                                 "例:「!ping skyblock.jp」");
             }
             else
             {
@@ -225,5 +232,6 @@ namespace TUSBちゃん.Modules.EveryoneUser
 
             await ReplyAsync("", embed: eb);
         }
+
     }
 }

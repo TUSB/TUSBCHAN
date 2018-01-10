@@ -176,6 +176,8 @@
     <Compile Include="API\MinecraftServer.cs" />
     <Compile Include="API\News.cs" />
     <Compile Include="API\Niconico.cs" />
+    <Compile Include="API\Quiz\Quiz.cs" />
+    <Compile Include="API\Quiz\QuizList.cs" />
     <Compile Include="API\Quotation.cs" />
     <Compile Include="API\Translator\AzureAuthToken.cs" />
     <Compile Include="API\Translator\Translate.cs" />

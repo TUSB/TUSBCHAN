@@ -1,20 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using AngleSharp.Dom.Html;
+﻿using AngleSharp.Dom.Html;
 using AngleSharp.Extensions;
 using AngleSharp.Parser.Html;
 using Discord;
 using Discord.Commands;
-using Discord.Rest;
-using Discord.WebSocket;
-using TUSBちゃん.API;
-using TUSBちゃん.API.Docomo;
+using System;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace TUSBちゃん.Modules.EveryoneUser
 {

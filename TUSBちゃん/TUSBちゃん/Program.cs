@@ -1,13 +1,9 @@
 ﻿using Discord;
-using Discord.Audio;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -86,7 +82,10 @@ namespace TUSBちゃん
                 }
             }
 
-            await new Modules.EveryoneUser.Education().Reply(message);
+            if (message.Content.Substring(0,1) != "!")
+            {
+                await new Modules.EveryoneUser.Education().Reply(message);
+            }
 
             int argPos = 0;
 
