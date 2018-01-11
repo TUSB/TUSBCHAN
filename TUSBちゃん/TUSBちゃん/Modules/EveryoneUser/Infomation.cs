@@ -51,6 +51,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
             await ReplyAsync(DateTime.Now.ToString("yyyy年MM月dd日 tthh時mm分ss秒fffミリ秒"));
         }
 
+
         [Command("echo")]
         [Summary("言葉を発言させる")]
         public async Task Say([Remainder, Summary("発言させる言葉")] string echo = null)
@@ -231,6 +232,13 @@ namespace TUSBちゃん.Modules.EveryoneUser
             };
 
             await ReplyAsync("", embed: eb);
+        }
+
+        [Command("test")]
+        [Summary("テスト")]
+        public async Task Test()
+        {
+            await ReplyAsync(new API.PaizaIO().GetCodeOut("b36V-DRQhLmPnxi2oNMtKg"));
         }
 
     }

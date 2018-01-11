@@ -176,6 +176,7 @@
     <Compile Include="API\MinecraftServer.cs" />
     <Compile Include="API\News.cs" />
     <Compile Include="API\Niconico.cs" />
+    <Compile Include="API\PaizaIO.cs" />
     <Compile Include="API\Quiz\Quiz.cs" />
     <Compile Include="API\Quiz\QuizList.cs" />
     <Compile Include="API\Quotation.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Library\IniFileWrapper.cs" />
     <Compile Include="Modules\Creator\ServerControl.cs" />
     <Compile Include="Modules\EveryoneUser\AudioModule.cs" />
+    <Compile Include="Modules\EveryoneUser\Coding.cs" />
     <Compile Include="Modules\EveryoneUser\Game.cs" />
     <Compile Include="Modules\EveryoneUser\Infomation.cs" />
     <Compile Include="Modules\EveryoneUser\Education.cs" />
