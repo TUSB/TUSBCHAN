@@ -173,35 +173,6 @@ namespace TUSBちゃん.Modules.EveryoneUser
             await ReplyAsync(news.GetNews());
         }
 
-        [Command("question")]
-        [Summary("アンケートを開始します。（未実装）")]
-        public async Task Question([Summary("アンケート内容")] string title = null, string question = null, string img = null)
-        {
-            var userInfo = Context.User;
-            var split = question.Split(',');
-
-            if (img == null)
-                img = userInfo.GetAvatarUrl() ?? "http://ravegames.net/ow_userfiles/themes/theme_image_22.jpg";
-
-            Console.WriteLine(img);
-            var eb = new EmbedBuilder()
-            {
-                Color = new Color(0, 255, 0),
-                ThumbnailUrl = img,
-                Title = $"{title}",
-                Description = $"{string.Join(":one: \n", split)}",
-                Footer = new EmbedFooterBuilder()
-                {
-                    Text = $"質問者: {Context.User.Username}#{Context.User.Discriminator}",
-                    IconUrl = new Uri(Context.User.GetAvatarUrl()).ToString()
-                }
-            };
-
-            var m = (RestUserMessage)await Context.Channel.GetMessageAsync(Context.Channel.Id);
-            //          await m.AddReactionAsync(new Emoji(EFirst));
-            await Context.Channel.SendMessageAsync("", embed: eb);
-        }
-
 
         [Command("userinfo")]
         [Summary("ユーザの情報を返します")]
@@ -221,7 +192,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
                 Color = new Color(4, 97, 247),
                 ThumbnailUrl = new Uri(avatarURL).ToString(),
                 Title = $"{userInfo.Username}",
-                Description = $"初参加日{userInfo.CreatedAt.ToString().Remove(userInfo.CreatedAt.ToString().Length - 6)}." +
+                Description = $"Discord登録日{userInfo.CreatedAt.ToString().Remove(userInfo.CreatedAt.ToString().Length - 6)}." +
                               $"{(int)(DateTime.Now.Subtract(userInfo.CreatedAt.DateTime).TotalDays)} 日\n\n {permissions}",
                 Footer = new EmbedFooterBuilder()
                 {
