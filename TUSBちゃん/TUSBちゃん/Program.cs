@@ -79,6 +79,7 @@ namespace TUSBちゃん
                     //翻訳処理
                     if (new Functions.Decision().IsEnglish(messageParam))
                     {
+                        //トークン
                         var authtoken = new API.Translator.AzureAuthToken(ini["Azure", "Token"]);
                         var translate = new API.Translator.Translate();
                         var token = authtoken.GetAccessToken();
