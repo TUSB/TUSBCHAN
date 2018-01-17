@@ -11,19 +11,19 @@ namespace TUSBちゃん.Modules.EveryoneUser
     {
         private Library.IniFileWrapper ini = new Library.IniFileWrapper();
 
-        public async Task Reply(SocketUserMessage message)
+        public async Task<bool> Reply(SocketUserMessage message)
         {
             SqlConnection connection = null;
-
+            bool ret = false;
             try
             {
+                var rnd = new Random();
                 // DB接続
                 if (ConnectDB(ref connection) == false)
                 {
                 }
                 string query = string.Format("SELECT * FROM 応答内容");
                 SqlCommand command = new SqlCommand(query, connection);
-
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -31,13 +31,26 @@ namespace TUSBちゃん.Modules.EveryoneUser
                         if (message.Content.Contains(reader["言葉"].ToString()))
                         {
                             var channel = message.Channel as SocketTextChannel;
-                            await channel.SendMessageAsync(reader["返事"].ToString());
+
+                            var split = reader["返事"].ToString().Split(';');
+                            
+                            var word = split[rnd.Next(0, split.Length)];
+                            
+                            if (word.Equals("$"))
+                            {
+                                var chat = new API.Docomo.ChatAI();
+                                var response = chat.GetChat(message.Content,message.Author.Username);
+                                word = response.utt;
+                            }
+                            await channel.SendMessageAsync(word);
+                            ret = true;
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 //データ取得失敗
             }
             finally
@@ -46,6 +59,8 @@ namespace TUSBちゃん.Modules.EveryoneUser
                 connection.Close();
                 connection.Dispose();
             }
+
+            return ret;
         }
 
         [Command("addeducation")]

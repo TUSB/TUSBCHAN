@@ -68,23 +68,28 @@ namespace TUSBちゃん
             if (message.Author.IsBot)
                 return;
 
-            //翻訳処理
-            if (new Functions.Decision().IsEnglish(messageParam) && message.Content.Substring(0, 1) != "!")
-            {
-                var authtoken = new API.Translator.AzureAuthToken("0fcab95615874cb2bdbc3fddbbdb1412");
-                var translate = new API.Translator.Translate();
-                var token = authtoken.GetAccessToken();
-                var text = translate.TranslateMethod(token, message.Content);
-                if (text != message.Content)
-                {
-                    var channel = message.Channel as SocketTextChannel;
-                    await channel.SendMessageAsync(text);
-                }
-            }
+            
 
             if (message.Content.Substring(0,1) != "!")
             {
-                await new Modules.EveryoneUser.Education().Reply(message);
+                bool isreply = await new Modules.EveryoneUser.Education().Reply(message);
+
+                if (!isreply)
+                {
+                    //翻訳処理
+                    if (new Functions.Decision().IsEnglish(messageParam))
+                    {
+                        var authtoken = new API.Translator.AzureAuthToken(ini["Azure", "Token"]);
+                        var translate = new API.Translator.Translate();
+                        var token = authtoken.GetAccessToken();
+                        var text = translate.TranslateMethod(token, message.Content);
+                        if (text != message.Content)
+                        {
+                            var channel = message.Channel as SocketTextChannel;
+                            await channel.SendMessageAsync(text);
+                        }
+                    }
+                }
             }
 
             await new Modules.EveryoneUser.Coding().Reply(message);

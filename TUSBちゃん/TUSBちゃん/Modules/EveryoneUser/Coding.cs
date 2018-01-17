@@ -50,7 +50,14 @@ namespace TUSBちゃん.Modules.EveryoneUser
                 connection.Dispose();
             }
         }
-        
+
+        [Command("runcode")]
+        [Summary("コードを実行します")]
+        public async Task RunCode(string id)
+        {
+            await ReplyAsync(paiza.GetCodeOut(id));
+        }
+
         [Command("codelist")]
         [Summary("登録されているコードの一覧を表示します")]
         public async Task ViewCodes()

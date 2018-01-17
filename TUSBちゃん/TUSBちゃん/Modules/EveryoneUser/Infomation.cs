@@ -23,6 +23,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
     public class Infomation : ModuleBase
     {
         private CommandService _service;
+        private Library.IniFileWrapper ini = new Library.IniFileWrapper();
 
         public Infomation(CommandService service)
         {
@@ -150,7 +151,7 @@ namespace TUSBちゃん.Modules.EveryoneUser
         [Summary("翻訳します")]
         public async Task Translator([Summary("英語")]string english = null)
         {
-            var authtoken = new API.Translator.AzureAuthToken("0fcab95615874cb2bdbc3fddbbdb1412");
+            var authtoken = new API.Translator.AzureAuthToken(ini["Azure","Token"]);
             var translate = new API.Translator.Translate();
             var token = authtoken.GetAccessToken();
             var text = translate.TranslateMethod(token, english);
