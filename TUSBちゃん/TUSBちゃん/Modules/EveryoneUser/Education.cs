@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace TUSBちゃん.Modules.EveryoneUser
@@ -33,13 +34,13 @@ namespace TUSBちゃん.Modules.EveryoneUser
                             var channel = message.Channel as SocketTextChannel;
 
                             var split = reader["返事"].ToString().Split(';');
-                            
+
                             var word = split[rnd.Next(0, split.Length)];
-                            
+
                             if (word.Equals("$"))
                             {
                                 var chat = new API.Docomo.ChatAI();
-                                var response = chat.GetChat(message.Content,message.Author.Username);
+                                var response = chat.GetChat(message.Content, message.Author.Username);
                                 word = response.utt;
                             }
                             await channel.SendMessageAsync(word);
@@ -61,6 +62,45 @@ namespace TUSBちゃん.Modules.EveryoneUser
             }
 
             return ret;
+        }
+
+        [Command("listeducation")]
+        [Alias("listedu")]
+        [Summary("自動応答のリストを表示します")]
+        public async Task ListEducation()
+        {
+            SqlConnection connection = null;
+            try
+            {
+                var rnd = new Random();
+                // DB接続
+                if (ConnectDB(ref connection) == false)
+                {
+                }
+                var sb = new StringBuilder();
+                string query = string.Format("SELECT * FROM 応答内容");
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        sb.AppendFormat("言葉:{0} 返事{1}\n", reader["言葉"], reader["返事"]);
+                    }
+                }
+
+                await ReplyAsync(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                //データ取得失敗
+            }
+            finally
+            {
+                // データベースの接続終了
+                connection.Close();
+                connection.Dispose();
+            }
         }
 
         [Command("addeducation")]

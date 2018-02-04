@@ -72,7 +72,7 @@ namespace TUSBちゃん.API.Twitter
                 image = status.Entities.Media.First().MediaUrlHttps;
             }
 
-            if ((text.IndexOf("@TUSkyBlock") != -1 || name == "TUSB") && text.IndexOf("RT ") == -1)
+            if ((text.IndexOf("@TUSkyBlock") != -1 || screenName == "TUSkyBlock") && text.IndexOf("RT ") == -1)
             {
                 var title = name == "TUSB" ? $"{name}のつぶやき" : $"{name}さんからのTwitterリプライ";
                 
