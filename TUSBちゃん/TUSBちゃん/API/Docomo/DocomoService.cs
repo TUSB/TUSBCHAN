@@ -13,7 +13,6 @@ namespace TUSBちゃん.API.Docomo
 
         public ChatResponse GetChat(ChatResponse response, string name)
         {
-
             string _url = "https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=";
             _url += ini["Docomo", "APIKEY"];
 

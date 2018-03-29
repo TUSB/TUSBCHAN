@@ -83,7 +83,7 @@ namespace TUSBちゃん
                         var authtoken = new API.Translator.AzureAuthToken(ini["Azure", "Token"]);
                         var translate = new API.Translator.Translate();
                         var token = authtoken.GetAccessToken();
-                        var text = translate.TranslateMethod(token, message.Content);
+                        var text = translate.toJapanese(token, message.Content);
                         if (text != message.Content)
                         {
                             var channel = message.Channel as SocketTextChannel;

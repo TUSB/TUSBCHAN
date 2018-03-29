@@ -146,15 +146,27 @@ namespace TUSBちゃん.Modules.EveryoneUser
             }
         }
 
-        [Command("translator")]
-        [Alias("t", "trans")]
-        [Summary("翻訳します")]
-        public async Task Translator([Summary("英語")]string english = null)
+        [Command("japan")]
+        [Alias("ja", "jpn")]
+        [Summary("日本語に翻訳します")]
+        public async Task ToJapanese([Summary("英語")]string english = null)
         {
             var authtoken = new API.Translator.AzureAuthToken(ini["Azure","Token"]);
             var translate = new API.Translator.Translate();
             var token = authtoken.GetAccessToken();
-            var text = translate.TranslateMethod(token, english);
+            var text = translate.toJapanese(token, english);
+            await ReplyAsync(text);
+        }
+
+        [Command("english")]
+        [Alias("en", "eng")]
+        [Summary("日本語に翻訳します")]
+        public async Task ToEnglish([Summary("日本語")]string japanese = null)
+        {
+            var authtoken = new API.Translator.AzureAuthToken(ini["Azure", "Token"]);
+            var translate = new API.Translator.Translate();
+            var token = authtoken.GetAccessToken();
+            var text = translate.toJapanese(token, japanese);
             await ReplyAsync(text);
         }
 
