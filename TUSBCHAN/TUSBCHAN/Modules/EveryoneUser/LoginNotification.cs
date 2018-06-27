@@ -26,7 +26,7 @@ namespace TUSBCHAN.Modules.EveryoneUser
 
                 if (DBAccesser.RunSQL(sql))
                 {
-                    await ReplyAsync("ログイン通知を設定しなおしました");
+                    await ReplyAsync("ログイン通知を設定し直しました");
                 }
                 else
                 {
@@ -53,21 +53,19 @@ namespace TUSBCHAN.Modules.EveryoneUser
 
         [Command("removelogin")]
         [Summary("ログイン通知を削除します")]
-        public async Task RemoveLoginNotification(string word)
+        public async Task RemoveLoginNotification()
         {
-            var channelId = Context.Channel.Id;
-            var sql = string.Format("DELETE FROM ログイン WHERE チャンネルID = '{0}' AND 内容 = '{1}'",
-                channelId,
-                word);
+            var serverId = Context.Guild.Id;
+            var sql = string.Format("DELETE FROM ログイン WHERE サーバーID = '{0}'",
+                serverId);
 
             if (DBAccesser.RunSQL(sql))
             {
-                await ReplyAsync(string.Format("ログイン通知を設定しました",
-                    word));
+                await ReplyAsync(string.Format("ログイン通知を削除しました"));
             }
             else
             {
-                await ReplyAsync("ログイン通知を設定できませんでした");
+                await ReplyAsync("ログイン通知を削除できませんでした");
             }
         }
     }

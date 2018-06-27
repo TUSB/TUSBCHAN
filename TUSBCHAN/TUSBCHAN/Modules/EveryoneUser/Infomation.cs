@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Http;
+﻿using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
+using System;
+using System.Linq;
 using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using AngleSharp.Dom.Html;
-using AngleSharp.Extensions;
-using AngleSharp.Parser.Html;
-using Discord;
-using Discord.Commands;
-using System.Linq;
-using Discord.Rest;
-using Discord.WebSocket;
 using TUSBCHAN.API;
 using TUSBCHAN.API.Docomo;
 using TUSBCHAN.Functions;
@@ -146,13 +137,21 @@ namespace TUSBCHAN.Modules.EveryoneUser
             }
         }
 
+        [Command("generate")]
+        [Summary("APIジェネレート")]
+        public async Task DocomoGenerate()
+        {
+            new DocomoService().Registration("Chatting");
+            await ReplyAsync("テスト");
+        }
+
         [Command("dchat")]
         [Alias("c", "chat")]
         [Summary("ドコモAPIを使用して対話します")]
         public async Task DocomoChat([Summary("チャット内容")] string word = null)
         {
             var response = ChatAI.GetChat(word, Context.Message.Author.Username);
-            await ReplyAsync(response.utt);
+            await ReplyAsync(response);
         }
 
         [Command("dqa")]

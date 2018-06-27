@@ -9,15 +9,10 @@ namespace TUSBCHAN.API.Docomo
 {
     class ChatAI
     {
-        private static Docomo.ChatResponse response = new ChatResponse();
-
-        public static ChatResponse GetChat(string word,string name)
+        public static string GetChat(string word, string name)
         {
             var dservice = new Docomo.DocomoService();
-            response.utt = word;
-            response = dservice.GetChat(response,name);
-
-            return response;
+            return dservice.GetChat(word, name);
         }
     }
 }

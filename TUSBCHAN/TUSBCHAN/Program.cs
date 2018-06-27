@@ -18,13 +18,17 @@ namespace TUSBCHAN
         public static CommandService commands;
         public static IServiceProvider services;
         
+        // 起動時にMainAsyncを起動
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
 
         public async Task MainAsync()
         {
+            // iniファイルから設定をロード
             Common.IniFileLoad();
 
+
+            // Discordに接続
             client = new DiscordSocketClient();
             commands = new CommandService();
             services = new ServiceCollection().BuildServiceProvider();
@@ -38,12 +42,14 @@ namespace TUSBCHAN
             await client.LoginAsync(TokenType.Bot, Common.DiscordToken);
             await client.StartAsync();
 
+            // Twitterに接続
             var twitter = new API.Twitter.Streaming(client);
             twitter.StartStreaming();
 
             await Task.Delay(-1);
         }
 
+        // Discord接続開始時イベント
         private Task Start()
         {
             return Task.CompletedTask;
@@ -99,6 +105,8 @@ namespace TUSBCHAN
         /// <returns></returns>
         private async Task UserJoined(SocketGuildUser user)
         {
+            // 参加通知メッセージを流す
+
             var sql = string.Format("SELECT * FROM ログイン WHERE サーバーID = '{0}'",
                 user.Guild.Id);
 
@@ -121,6 +129,8 @@ namespace TUSBCHAN
         /// <returns></returns>
         private async Task UserLeft(SocketGuildUser user)
         {
+            // 退出通知メッセージを流す
+
             var sql = string.Format("SELECT * FROM ログアウト WHERE サーバーID = '{0}'",
                 user.Guild.Id);
 
@@ -136,14 +146,25 @@ namespace TUSBCHAN
             }
         }
 
+        /// <summary>
+        /// Discordから切断されてしまった場合
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
         private Task Disconnected(Exception ex)
         {
+            // ソフトウェア再起動で再接続
             Console.WriteLine("異常を検知したためTUSBちゃんを再起動します...");
             System.Diagnostics.Process.Start(Application.ExecutablePath);
             Environment.Exit(0);
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// ログをコンソールに出力
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         private Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());

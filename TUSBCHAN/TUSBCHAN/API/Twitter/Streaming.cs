@@ -78,7 +78,7 @@ namespace TUSBCHAN.API.Twitter
             // 自動リプライ応答
             if (text.Contains("@TUSkyBlock") && (!text.Contains("RT ")) && screenName != "TUSkyBlock")
             {
-                var str = Docomo.ChatAI.GetChat(text, screenName).utt;
+                var str = Docomo.ChatAI.GetChat(text, screenName);
                 str = "@" + screenName + " " + str;
                 token.Statuses.Update(new { status = str, in_reply_to_status_id = id });
             }
